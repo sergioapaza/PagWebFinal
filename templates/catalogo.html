@@ -1,0 +1,36 @@
+
+
+{% include 'header.html' %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+<div class="container-items">
+    {% for producto in productos %}
+
+    <div class="item">
+        <img src="{{ url_for('static', filename='img/productos/' + producto.id|string + '/item.png') }}" alt="{{ producto.nombre }}" class="item-img">
+        <div class="info-producto">
+            <h3>{{ producto.nombre }}</h3>
+            <p class="price">{{ MONEDA }} {{ producto.precio }}</p>
+            <a href="{{ url_for('detalles_producto', id=producto.id, token=producto.token)}}">Ver Detalles</a>
+    
+            <form action="{{ url_for('agregar_producto_carrito') }}" method="post" class="d-flex align-items-center">
+                <input type="hidden" name="id_producto" value="{{ producto.id }}">
+                <label for="cantidad-{{ producto.id }}" class="me-2">Cantidad:</label>
+                <input type="number" id="cantidad-{{ producto.id }}" name="cantidad" value="1" min="1" class="form-control me-2" style="width: 80px;">
+                <button type="submit" class="btn btn-outline-primary">Agregar al carrito</button>
+            </form>
+        </div>
+    </div>
+
+    
+
+    {% endfor %}
+</div>

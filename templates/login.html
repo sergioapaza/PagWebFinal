@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+<div class="d-flex justify-content-center mt-5">
+    <div class="contenedor">
+        <h2>Iniciar Sesión</h2>
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="usuario">Usuario</label>
+            <div class="contenedor-input">
+                <input type="text" name="usuario" required
+                autocomplete="off">
+                <i class='bx bx-at'></i>
+            </div>
+            <label for="password">Contraseña:</label>
+            <div class="contenedor-input">
+                <input type="password" name="password" required> 
+                <i class='bx bx-lock-alt' ></i>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-3 mb-3">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <button class="btn" type="submit">Iniciar Sesión</button>
+            <div class="links">
+                <p>¿No tienes una cuenta? <a href="{{ url_for('registro') }}">Registrarse</a></p>
+            </div>
+            </form>
+    </div>
+</div>
+</body>
+</html>
+{% include 'footer.html' %}

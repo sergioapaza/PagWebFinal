@@ -1,0 +1,31 @@
+{% include 'admin_header.html' %}
+<div class="container mt-5">
+    <h2>Modificar/Eliminar Usuarios</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <form action="{{ url_for('modificar_eliminar_usuario') }}" method="POST">
+                    <td>{{ usuario[1] }}</td>
+                    <td><input type="email" name="nuevo_email" value="{{ usuario[2] }}" class="form-control"></td>
+                    <td><input type="text" name="nuevo_telefono" value="{{ usuario[3] }}" class="form-control"></td>
+                    <td>
+                        <input type="hidden" name="id_usuario" value="{{ usuario[0] }}">
+                        <button type="submit" name="modificar" class="btn btn-warning">Modificar</button>
+                        <button type="submit" name="eliminar" class="btn btn-danger">Eliminar</button>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include 'footer.html' %}

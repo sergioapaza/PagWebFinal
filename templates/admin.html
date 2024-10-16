@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+<div class="container mt-5">
+    <h2>Bienvenido ADMINISTRADOR</h2>
+    <nav>
+        <ul class="nav nav-tabs">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Productos
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+                    <li><a class="dropdown-item" href="{{ url_for('agregar_producto') }}">Agregar Productos</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('modificar_eliminar_producto') }}">Modificar/Eliminar Productos</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Usuarios
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+                    <li><a class="dropdown-item" href="{{ url_for('modificar_eliminar_usuario') }}">Modificar/Eliminar Usuarios</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('ver_pedidos') }}">Ver Pedidos</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="mt-4">
+        <p>Selecciona una opción en el menú para gestionar productos, usuarios o ver los pedidos.</p>
+    </div>
+</div>
+{% include 'footer.html' %}

@@ -1,0 +1,61 @@
+{% include 'admin_header.html' %}
+
+
+
+<div class="container mt-5">
+    <h2>Modificar/Eliminar Productos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoría (ID)</th>
+                <th>Activo</th>
+                <th>Descuento</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <form action="{{ url_for('modificar_eliminar_producto') }}" method="POST" enctype="multipart/form-data">
+                    <td><input type="text" name="nombre" value="{{ producto[1] }}" class="form-control"></td>
+                    <td><input type="text" name="descripcion" value="{{ producto[2] }}" class="form-control"></td>
+                    <td><input type="number" step="0.01" name="precio" value="{{ producto[4] }}" class="form-control"></td>
+                    <td><input type="number" name="id_categoria" value="{{ producto[5] }}" class="form-control"></td>
+                    <td><input type="checkbox" name="activo" {% if producto[6] == 1 %}checked{% endif %}></td>
+                    <td><input type="number" name="descuento" value="{{ producto[7] }}" class="form-control"></td>
+                    
+                    <!-- Campo para mostrar y modificar imagen -->
+                    <td>
+                        <input type="file" name="nueva_imagen" class="form-control">
+                        <img src="{{ url_for('static', filename='img/productos/' + producto[0]|string + '/item.png') }}" alt="{{ producto[1] }}" style="width: 100px; height: auto;">
+                    </td>
+                    
+                    <td>
+                        <input type="hidden" name="id_producto" value="{{ producto[0] }}">
+                        <button type="submit" name="modificar" class="btn btn-warning">Modificar</button>
+                        <button type="submit" name="eliminar" class="btn btn-danger">Eliminar</button>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}

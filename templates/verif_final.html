@@ -1,0 +1,50 @@
+
+
+{% include 'header.html' %}
+
+<div class="container mt-5">
+    <h2>Verificación Final</h2>
+
+    <h4>Productos en tu carrito</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in carrito %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>{{ MONEDA }}{{ producto.precio }}</td>
+                    <td>{{ MONEDA }}{{ producto.total }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="text-right"><strong>Total Carrito:</strong></td>
+                <td>{{ MONEDA }}{{ total_carrito }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Datos del Cliente</h4>
+    <ul>
+        <li><strong>Nombres:</strong> {{ cliente.nombres }}</li>
+        <li><strong>Apellidos:</strong> {{ cliente.apellidos }}</li>
+        <li><strong>Email:</strong> {{ cliente.email }}</li>
+        <li><strong>Teléfono:</strong> {{ cliente.telefono }}</li>
+    </ul>
+
+    <form action="{{ url_for('realizar_pedido') }}" method="POST">
+        <button type="submit" class="btn btn-primary">Realizar Pedido</button>
+    </form>
+
+    
+</div>
+
+
+{% include 'footer.html' %}

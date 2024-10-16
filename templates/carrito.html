@@ -1,0 +1,50 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+    <h2>Tu Carrito de Compras</h2>
+    {% if carrito %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in carrito %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>
+                            <!-- Formulario para actualizar la cantidad -->
+                            <form action="{{ url_for('actualizar_cantidad_producto_carrito', id_producto=producto.id) }}" method="POST" style="display:inline;">
+                                <input type="number" name="nueva_cantidad" value="{{ producto.cantidad }}" min="1" class="form-control form-control-sm" style="width: 60px; display:inline;">
+                                <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>{{ MONEDA }}{{ producto.precio }}</td>
+                        <td>{{ MONEDA }}{{ producto.total }}</td>
+                        <td>
+                            <form action="{{ url_for('eliminar_producto_carrito', id_producto=producto.id) }}" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');" >
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3" class="text-right"><strong>Total Carrito:</strong></td>
+                    <td>{{ MONEDA }}{{ total_carrito }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-grid gap-2">
+            <a href="{{ url_for('verif_final') }}" class="btn btn-success">Proceder al Pago</a>
+        </div>
+    {% else %}
+        <p>No tienes productos en tu carrito.</p>
+    {% endif %}
+</div>
+
+{% include 'footer.html' %}

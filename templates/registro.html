@@ -1,0 +1,61 @@
+{% include 'header.html' %}
+<div class="d-flex justify-content-center mt-5">
+    <div class="contenedor">
+        <h2>Registrarse</h2>
+        <form action="{{ url_for('registro') }}" method="POST" autocomplete="off">
+            <label for="nombres">Nombres *</label>
+            <div class="contenedor-input">
+                <input type="text" name="nombres" autocomplete="off" required>
+            </div>
+            <label for="apellidos">Apellidos*</label>
+            <div class="contenedor-input">
+                <input type="text" name="apellidos" autocomplete="off" required>
+            </div>
+            <label for="email">Email*</label>
+            <div class="contenedor-input">
+                <input type="email" name="email" autocomplete="off" required>
+                <i class='bx bx-at'></i> 
+            </div>
+            <label for="telefono">Telefono</label>
+            <div class="contenedor-input">
+                <input type="tel" name="telefono" autocomplete="off">
+            </div>
+            <label for="dni">DNI*</label>
+            <div class="contenedor-input">
+                <input type="text" name="dni" autocomplete="off" required>
+            </div>
+            <label for="usuario">Nombre de usuario*</label>
+            <div class="contenedor-input">
+                <input type="text" name="usuario" autocomplete="off" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <label for="password">Contraseña *</label>
+            <div class="contenedor-input">
+                <input type="password" name="password" required>
+                <i class='bx bx-lock-alt' ></i>
+            </div>
+            <label for="repassword">Repetir contraseña*</label>
+            <div class="contenedor-input">
+                <input type="password" name="repassword" required>
+                <i class='bx bx-lock-alt' ></i>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-3 mb-3">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <i><b>Nota: </b>Los campos con asteriscos son obligatorios</i>
+            <button type="submit" class="btn">Registrarme</button> 
+            <div class="links">
+                <p>¿Tienes una cuenta? <a href="{{ url_for('login') }}"  class = "login-link">Iniciar sesión</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% include 'footer.html' %}
